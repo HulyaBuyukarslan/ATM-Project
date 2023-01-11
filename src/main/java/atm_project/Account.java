@@ -1,10 +1,7 @@
 package atm_project;
-
 import java.text.DecimalFormat;
 import java.util.Scanner;
-
 public class Account {
-
     private int accountNumber;// hesap numarasi
     private int pinNumber;//sifre
     private double checkingBalance; // vadesiz hesap bakiyesi
@@ -43,21 +40,25 @@ public class Account {
     }
     //para cekme  => paraCekmeIslemindenSonraKalanMiktar  amount : miktar
     private double calculateCheckingBalanceAfterWithdraw(double amount){
+        //  100              200               100
         checkingBalance =  checkingBalance - amount;
         return checkingBalance;
     }
     //para yatirma para yatirma isleminden sonra kalan bakiyeyi hesapla
     private double calculateCheckingBalanceAfterDeposit(double amount){
-        checkingBalance =  checkingBalance + amount;
+        //vadesiz bakiye 205      200             5
+        checkingBalance = checkingBalance + amount;
         return checkingBalance;
     }
     // para cekme: saving hesabindan para cekildikten sonra kalan bakiye
     private double calculateSavingBalanceAfterWithdraw(double amount){
-        savingBalance = savingBalance - amount;
+        //vadeli hesap bakiyesi        150             50
+        savingBalance =              savingBalance - amount;
         return savingBalance;
     }
     //para yatirma: saving hesabina para yatirdiktan sonra geri kalan bakiyeyi hesaplayiniz
     private double calculateSavingBalanceAfterDeposit(double amount){
+        //vadeli hesap       100           100
         savingBalance =  savingBalance + amount;
         return  savingBalance;
     }
@@ -65,11 +66,11 @@ public class Account {
     public void getCheckingWithdraw(){
         displayCurrentAmount(checkingBalance);
         System.out.println("Cekmek istediginiz mikatri giriniz:");
-        double amount = input.nextDouble();
+        double amount = input.nextDouble();//200
         if(amount <= 0) {
             System.out.println("Sifir veya eksi rakamlar gecersizdir!");
             getCheckingWithdraw();//recursive method //medthodu tekrardan cagirma
-        }
+        }    // 200           200
         else if(amount <= checkingBalance){
             calculateCheckingBalanceAfterWithdraw(amount);
             displayCurrentAmount(checkingBalance);
@@ -79,7 +80,7 @@ public class Account {
     }
     //Para yatirma(checking): Musteri ile para yatirmak icin etkilesime gecelim
     public void getCheckingDeposit(){
-        displayCurrentAmount(checkingBalance);
+        displayCurrentAmount(checkingBalance);//hesabinizda su miktar bulunmaktadir
         System.out.println("Yatirmak istediginiz miktari giriniz:");
         double amount = input.nextDouble();
         if(amount <= 0){
